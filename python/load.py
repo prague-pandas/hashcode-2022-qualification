@@ -20,10 +20,10 @@ def load(f):
 			'num_days_to_complete': num_days_to_complete,
 			'score': score,
 			'best_before': best_before, 
-			'skills': {},
+			'skills': [],
 		}
 		for _ in range(num_roles):
 			role_type, required_skill_level = next(f_lines).split(' ')
 			required_skill_level = int(required_skill_level)
-			projects[project_name]['skills'][role_type] = required_skill_level
+			projects[project_name]['skills'].append((role_type, required_skill_level))
 	return contributors, projects
