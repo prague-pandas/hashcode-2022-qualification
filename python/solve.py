@@ -2,7 +2,9 @@ import numpy as np
 from ordered_set import OrderedSet
 
 
-def solve(dataset):
+def solve(dataset, rng=None):
+    if rng is None:
+        rng = np.random.default_rng(0)
     contributors, projects = dataset
     c_names = list(contributors)
     skills = OrderedSet()
@@ -20,17 +22,19 @@ def solve(dataset):
         project_assignment = []
         project_start = 0
         length = project['num_days_to_complete']
-        unassigned = np.ones(len(conts), dtype=bool)
+        assigned = set()
         for skill_name, level in project['skills']:
             j = skills.index(skill_name)
-            eligible = conts[unassigned, j] >= level
-            if not np.any(eligible):
+            eligible = conts[:, j] >= level
+            eligible = np.nonzero(eligible)[0]
+            eligible = [e for e in eligible if e not in assigned]
+            if len(eligible) == 0:
                 break
-            c = np.argmax(eligible)
+            c = rng.choice(eligible)
             c_name = c_names[c]
             project_assignment.append(c_name)
             project_start = max(project_start, cont_free[c_name])
-            unassigned[c] = False
+            assigned.add(c)
         if len(project_assignment) < len(project['skills']):
             continue
         project_end = project_start + length
