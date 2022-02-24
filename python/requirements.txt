@@ -18,6 +18,8 @@ numpy==1.22.2
     #   matplotlib
     #   pandas
     #   scipy
+ordered-set==4.1.0
+    # via -r requirements.in
 packaging==21.3
     # via matplotlib
 pandas==1.4.1
@@ -38,3 +40,5 @@ scipy==1.8.0
     # via -r requirements.in
 six==1.16.0
     # via python-dateutil
+tqdm==4.62.3
+    # via -r requirements.in
