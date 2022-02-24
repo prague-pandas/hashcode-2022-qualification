@@ -16,9 +16,16 @@ def solve(dataset, rng=None):
         for skill, level in contributor.items():
             j = skills.index(skill)
             conts[i, j] = level
+
+    def score(name):
+        project = projects[name]
+        return project['best_before']
+
+    schedule = sorted(projects, key=lambda name: score(name))
     solution = []
     cont_free = {name: 0 for name in contributors}
-    for name, project in projects.items():
+    for name in schedule:
+        project = projects[name]
         project_assignment = []
         project_start = 0
         length = project['num_days_to_complete']
