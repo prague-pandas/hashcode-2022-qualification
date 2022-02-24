@@ -42,12 +42,15 @@ def solve(dataset, rng=None):
             project_assignment.append(c_name)
             project_start = max(project_start, cont_free[c_name])
             assigned.add(c)
-            contributors[c_names[c]][skill_name] = contributors[c_names[c]][skill_name] + 1
         if len(project_assignment) < len(project['skills']):
             continue
         project_end = project_start + length
         if project_end <= project['best_before'] + project['score']:
             solution.append((name, project_assignment))
-            for c_name in project_assignment:
+            for c_name, (skill_name, level) in zip(project_assignment, project['skills']):
                 cont_free[c_name] = project_end
+                j = skills.index(skill_name)
+                c = c_names.index(c_name)
+                if conts[c, j] <= level:
+                    conts[c, j] += 1
     return solution
