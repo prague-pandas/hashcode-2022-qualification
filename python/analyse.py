@@ -1,6 +1,7 @@
 import os
 
 from load import load
+from solve import solve
 
 filename = {
 	'a': 'a_an_example.in.txt',
@@ -14,5 +15,7 @@ filename = {
 if __name__ == '__main__':
 	with open(os.path.join('../input_data', filename['e'])) as f:
 		contributors, projects = load(f)
+		task = contributors, projects
+		solution = solve(task)
 		print(contributors)
 		print(projects)
