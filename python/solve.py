@@ -35,6 +35,7 @@ def solve(dataset, rng=None):
             project_assignment.append(c_name)
             project_start = max(project_start, cont_free[c_name])
             assigned.add(c)
+            contributors[c_names[c]][skill_name] = contributors[c_names[c]][skill_name] + 1
         if len(project_assignment) < len(project['skills']):
             continue
         project_end = project_start + length
