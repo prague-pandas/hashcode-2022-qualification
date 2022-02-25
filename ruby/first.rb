@@ -61,7 +61,8 @@ files.each do |file|
       c = contributors.delete_at(i)
       contributors.push(c)
       exclude[c[:name]] = 1
-      c[:skills][skill[:name]] += 1 if c[:skills][skill[:name]] <= skill[:level]
+      # for some reason this leveling isn't always accepted. Dunno why
+      #c[:skills][skill[:name]] += 1 if c[:skills][skill[:name]] <= skill[:level]
       c[:name]
     end
   end
