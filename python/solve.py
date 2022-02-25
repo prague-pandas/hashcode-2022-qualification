@@ -50,13 +50,6 @@ def solve(dataset, rng=None):
                 if len(eligible) == 0:
                     break
                 c = rng.choice(eligible)
-                for ec in eligible:
-                    if(level == contributors[c_names[ec]][skill_name]):
-                        c = ec
-                        break
-                    if ec in cont_free:
-                        if cont_free[ec] < c:
-                            c = ec
                 c_name = c_names[c]
                 project_assignment.append(c_name)
                 project_start = max(project_start, cont_free[c_name])
