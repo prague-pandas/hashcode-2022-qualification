@@ -51,7 +51,7 @@ def solve(dataset, rng=None):
                     break
                 c = rng.choice(eligible)
                 for ec in eligible:
-                    if(level == contributors[c_names[ec]][skill_name]):
+                    if skill_name in contributors[c_names[ec]] and level == contributors[c_names[ec]][skill_name]:
                         c = ec
                         break
                     if ec in cont_free:
